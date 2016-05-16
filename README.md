@@ -1,7 +1,10 @@
+[![Code Climate](https://codeclimate.com/github/diffcunha/jsonmltoreact/badges/gpa.svg)](https://codeclimate.com/github/diffcunha/jsonmltoreact)
+[![Test Coverage](https://codeclimate.com/github/diffcunha/jsonmltoreact/badges/coverage.svg)](https://codeclimate.com/github/diffcunha/jsonmltoreact/coverage)
+
 # jsonmltoreact
 JsonML to React converter
 
-## Usage
+## Install
 
 ```shell
 $ npm i --save jsonmltoreact
@@ -13,6 +16,7 @@ $ npm i --save jsonmltoreact
 import _ from 'lodash';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
+
 import JsonmlToReact from './src';
 
 // Some random React component
