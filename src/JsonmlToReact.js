@@ -1,6 +1,6 @@
 import React from 'react';
 import JsonML from 'jsonml.js/lib/utils';
-import isFunction from 'lodash.isFunction';
+import isFunction from 'lodash.isfunction';
 
 import {
   reactConverters,
