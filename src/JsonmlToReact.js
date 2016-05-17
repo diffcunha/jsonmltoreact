@@ -1,6 +1,6 @@
-import _ from 'lodash';
 import React from 'react';
 import JsonML from 'jsonml.js/lib/utils';
+import isFunction from 'lodash.isFunction';
 
 import {
   reactConverters,
@@ -18,7 +18,7 @@ export default class JsonmlToReact {
    * @param {Object} converters - Aditional converters
    */
   constructor(converters) {
-    this.converters = _.assign({}, reactConverters, converters);
+    this.converters = Object.assign({}, reactConverters, converters);
   }
 
   /**
@@ -35,7 +35,7 @@ export default class JsonmlToReact {
       return node;
     }
 
-    let attrs = _.assign({ key: index }, JsonML.getAttributes(node));
+    let attrs = Object.assign({ key: index }, JsonML.getAttributes(node));
 
     if (attrs.class) {
       attrs.className = attrs.class;
@@ -50,7 +50,7 @@ export default class JsonmlToReact {
     const children = JsonML.getChildren(node) || [];
 
     const converter = this.converters[tag];
-    const result = _.isFunction(converter) ? converter(attrs, data) : {};
+    const result = isFunction(converter) ? converter(attrs, data) : {};
 
     const type = result.type || tag;
     const props = result.props || attrs;

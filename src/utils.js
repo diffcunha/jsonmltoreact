@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import camelCase from 'lodash.camelcase';
+
 
 /**
  * React HTML tags
@@ -142,7 +143,10 @@ export const reactHTMLTags = [
 /**
  * Object with converters for the React tags
  */
-export const reactConverters = _.transform(reactHTMLTags, (acc, type) => acc[type] = type, {});
+export const reactConverters = reactHTMLTags.reduce((acc, type) => {
+  acc[type] = type;
+  return acc;
+}, {});
 
 
 /**
@@ -154,7 +158,7 @@ export function toStyleObject(styleCSS) {
   const style = {};
   styleCSS.split(/;\s*/g).forEach((rule) => {
     const [key, value] = rule.split(/:\s*/g);
-    style[_.camelCase(key)] = value;
+    style[camelCase(key)] = value;
   });
   return style;
 }
