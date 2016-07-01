@@ -31,7 +31,7 @@ export default class JsonmlToReact {
    */
   _visit(node, index, data) {
     // Is leaf node
-    if (typeof node === 'string') {
+    if (!node || typeof node === 'string') {
       return node;
     }
 
