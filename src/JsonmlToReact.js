@@ -55,6 +55,9 @@ export default class JsonmlToReact {
     const type = result.type || tag;
     const props = result.props || attrs;
 
+    // reassign key in case `converter` removed it
+    props.key = props.key || index;
+
     return React.createElement(type, props, children.map((child, index) => this._visit(child, index, data)));
   }
 
