@@ -16,14 +16,13 @@ $ npm i --save jsonmltoreact
 import _ from 'lodash';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-
-import JsonmlToReact from './src';
+import JsonmlToReact from 'jsonmltoreact';
 
 // Some random React component
 class CustomCompoenent extends React.Component {
   render() {
     return (
-      <div className="container">
+      <div className="customCompoenentContainer">
         {this.props.header && <h1>{this.props.header}</h1>}
         {this.props.subheader && <h2>{this.props.subheader}</h2>}
         {this.props.children}
@@ -36,7 +35,12 @@ class CustomCompoenent extends React.Component {
 let jsonmlToReact = new JsonmlToReact({
   'custom-tag': (props, data) => ({
     type: CustomCompoenent,
-    props: _.assign({}, props, data),
+    props: { ...props, ...data },
+  }),
+  'span': props => ({
+    props: {
+      className: 'foobar'
+    }
   })
 });
 
@@ -59,5 +63,13 @@ let data = {
 let reactComponent = jsonmlToReact.convert(jsonml, data);
 
 console.log(ReactDOMServer.renderToStaticMarkup(reactComponent));
-// <div class="container"><div class="container"><h1>foo</h1><h2>bar</h2><span>content</span></div></div>
+/*
+<div class="container">
+  <div class="customCompoenentContainer">
+    <h1>foo</h1>
+    <h2>bar</h2>
+    <span class="foobar">content</span>
+  </div>
+</div>
+*/
 ```
